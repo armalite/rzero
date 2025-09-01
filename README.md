@@ -1,5 +1,7 @@
 # rzero
 
+WARNING: This package is still in early development.
+
 Reusable training loop built around *challenger → solver → verifier* with curriculum control and a neat CLI.
 
 Includes two example domains:
