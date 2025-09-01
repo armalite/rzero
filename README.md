@@ -1,7 +1,7 @@
 # rzero
 ⚡ A reference implementation of **R-Zero** (Aug 2025) - the self-evolving training loop where Challengers and Solvers co-adapt, with pluggable components, curriculum control, and dataset logging.
 
-⚠️ Early Development — APIs may change.
+⚠️ Early Development - APIs may change.
 
 It provides:
  - A neat CLI (`rzero run`, `rzero dataset`) for quick experiments
