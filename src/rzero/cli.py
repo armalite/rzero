@@ -83,3 +83,32 @@ def dataset_cmd(path: Path) -> None:
     click.echo(f"Samples: {n}")
     if scores:
         click.echo(f"Accuracy: {acc:.3f}, mean score: {st.mean(scores):.3f}")
+
+@main.command()
+@click.option("-p", "--path", type=click.Path(dir_okay=False, exists=True, path_type=Path), required=True)
+@click.option("--save", type=click.Path(dir_okay=False, path_type=Path), default=None, help="Optional path to save solver state after replay.")
+def replay(path: Path, save: Path | None) -> None:
+    """Replay a dataset (JSONL of Samples) to update a trainable solver."""
+    from .domains.code_io import CodeIOChallenger, CodeIOVerifier
+    from .solvers.trainable_template import CodeIOTrainable
+    from .storage import read_jsonl
+    from .types import Sample, Task, Solution, Verification
+
+    # Build samples back from JSON (schema-aware)
+    rows = read_jsonl(path)
+    samples = [
+        Sample(
+            task=Task(**row["task"]),
+            solution=Solution(**row["solution"]),
+            verification=Verification(**row["verification"]),
+        )
+        for row in rows
+    ]
+
+    solver = CodeIOTrainable()
+    solver.update(samples)
+    click.echo(f"Replayed {len(samples)} samples into {solver.name}.")
+
+    if save:
+        solver.save(str(save))
+        click.echo(f"Saved solver state to {save}")
