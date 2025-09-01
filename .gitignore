@@ -105,8 +105,8 @@ ipython_config.py
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
 #   commonly ignored for libraries.
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
-#poetry.toml
+poetry.lock
+poetry.toml
 
 # pdm
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
@@ -205,3 +205,21 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# --- R-zero project additions ---
+
+# CLI output datasets and logs
+*.jsonl
+*.out
+out_*.jsonl
+out_*.json
+out_*.txt
+*.log
+
+# Example data directory (if you decide to keep generated files here)
+data/
+datasets/
+
+# Build/test caches (already partly covered, but explicit here too)
+.pyright/

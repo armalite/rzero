@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rzero"
+version = "0.2.0"
+description = "R-zero: reusable training loop (challenger/solver/verifier) with curriculum and CLI; includes arithmetic & code-io domains."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Adeeb R"}]
+license = {text = "MIT"}
+keywords = ["rzero", "training-loop", "curriculum", "cli", "arithmetic", "code"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Typing :: Typed"
+]
+dependencies = [
+  "click>=8.1",
+  "pydantic>=2.6"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "ruff>=0.5",
+  "pyright>=1.1.404",
+  "build>=1.2.1"
+]
+llm = [
+  "openai>=1.40.0",
+]
+
+
+[project.scripts]
+rzero = "rzero.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+rzero = ["py.typed"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
