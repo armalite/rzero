@@ -31,13 +31,15 @@ class CodeIOTrainable(Solver):
                 self.memory[name] = s.solution.content
 
     def save(self, path: str) -> None:
-        import json, pathlib
+        import json
+        import pathlib
         p = pathlib.Path(path)
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(json.dumps(self.memory, indent=2), encoding="utf-8")
 
     def load(self, path: str) -> None:
-        import json, pathlib
+        import json
+        import pathlib
         p = pathlib.Path(path)
         if p.exists():
             self.memory = json.loads(p.read_text(encoding="utf-8"))
