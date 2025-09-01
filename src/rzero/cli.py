@@ -32,8 +32,14 @@ def main() -> None:
     help="JSONL output path for samples (defaults to ./data/rzero_samples.jsonl).",
 )
 @click.option("--seed-difficulty", type=float, default=0.5, show_default=True, help="Initial difficulty [0..1].")
-@click.option("--model", default="gpt-5-mini", show_default=True, help="LLM model name (when --solver llm).")
-@click.option("--temperature", type=float, default=0.0, show_default=True, help="LLM temperature (when --solver llm).")
+@click.option("--model", default="gpt-5-mini", show_default=True, help="LLM model name (only used when --solver=llm).")
+@click.option(
+    "--temperature",
+    type=float,
+    default=None,
+    show_default=True,
+    help="LLM temperature; some models (e.g. gpt-5-*) only allow their default and will ignore this.",
+)
 def run(domain: str, solver: str, episodes: int, batch_size: int, dataset: Path, seed_difficulty: float, model: str, temperature: float) -> None:
     """Run the training loop for a domain."""
     # Domain wiring
